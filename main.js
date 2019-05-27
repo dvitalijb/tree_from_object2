@@ -1,17 +1,17 @@
 const data = {
-    "Рыбы": {
-        "Форель": {},
-        "Щука": {}
+    'Рыбы': {
+        'Форель': {},
+        'Щука': {}
     },
 
-    "Деревья": {
-        "Хвойные": {
-            "Лиственница": {},
-            "Ель": {}
+    'Деревья': {
+        'Хвойные': {
+            'Лиственница': {},
+            'Ель': {}
         },
-        "Цветковые": {
-            "Берёза": {},
-            "Тополь": {}
+        'Цветковые': {
+            'Берёза': {},
+            'Тополь': {}
         }
     }
 };
@@ -19,20 +19,24 @@ const data = {
 const container = document.getElementById('container');
 
 function createTree(domElement, obj) {
-    const ul = document.createElement('ul');
+    if (Object.keys(obj).length > 0) {
+        const ul = document.createElement('ul');
 
-    for (const key in obj) {
-        const li = document.createElement('li');
-        li.textContent = key;
-        ul.appendChild(li);
-        if (obj.hasOwnProperty(key)) {
-            createTree(li, obj[key])
+        for (const key in obj) {
+            const li = document.createElement('li');
+            li.textContent = key;
+            ul.appendChild(li);
+            console.log(obj.hasOwnProperty(key))
+
+            if (obj.hasOwnProperty(key)) {
+                createTree(li, obj[key])
+            }
         }
-    }
 
-    if(ul.textContent){
         domElement.appendChild(ul);
     }
+
+
 }
 
 createTree(container, data);
